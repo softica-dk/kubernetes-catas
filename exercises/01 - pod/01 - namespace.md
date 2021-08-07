@@ -22,9 +22,9 @@ Now create the namespace from the manifest:
 kubectl create -f test2.yaml
 ```
 
-Lets remove the two namespaces again
+Lets remove the first namespace
 ```
-kubectl delete namespace test test2
+kubectl delete namespace test 
 ```
 ## Deploy a simple pod in namespace
 Lets define a simple pod running nginx:
@@ -33,6 +33,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: nginx
+  namespace: test2
 spec:
   containers:
   - name: nginx
@@ -46,13 +47,13 @@ kubectl create -f pod.yaml
 ```
 Wait for the pod to be ready, as it needs to download the docker image and start it up
 ```
-kubectl get pods
+kubectl get pods -A
 ```
 > Question: What namespace did the pod get deployed to?
 
 Lets test that the pod is working
 ```
-kubectl port-forward nginx 8080:80
+kubectl port-forward nginx 8080:80 -n test2
 ```
 Open a webbrowser and go to localhost:8080
 
@@ -60,13 +61,11 @@ You should see the nginx default page being displayed.
 
 
 ## cleanup
-Lets cleanup, and remove the pod we created.
+Lets cleanup, and remove the namespace and pod we created.
 ```
-kubectl delete pod nginx
+kubectl delete namespace test2
 ```
 Check that the pod is removed
 ```
-kubectl get pods
+kubectl get pods -A
 ```
-
-> Question: Why did the pod not get rescheduled ?

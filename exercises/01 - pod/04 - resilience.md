@@ -41,4 +41,4 @@ kubectl delete pod willidie
 
 Did Kubernetes create a new pod ?
 
-Why not?
+Why? Why not?
