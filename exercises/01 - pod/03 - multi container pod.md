@@ -1,8 +1,8 @@
 # Multi container pod
-A pod can container multiple containers running at the same time. This is useful for a number of reasons.
+A pod can contain multiple containers running at the same time. This is useful for a number of reasons.
 
-1. Deligating work to different containers
-   * Running metric export from seperate container
+1. Delegating work to different containers
+   * Running metric export from separate container
    * Running a sidecar container for networking
 2. Running special health containers
 3. Running a container that sync remote data 
@@ -16,15 +16,11 @@ kind: Pod
 metadata:
   name: two-containers
 spec:
-
   restartPolicy: Never
-
   volumes:
   - name: shared-data
     emptyDir: {}
-
   containers:
-
   - name: proxy
     image: nginx
     ports:
@@ -46,7 +42,7 @@ The second container `curl` will die when done, and the other will keep on livin
 They both mount the volume `shared-data` where `curl` puts an `index.html` that the container `nginx` then serves. 
 
 ## Check the served html
-Like the initcontainer exercise, we can check that the `nginx` container serves the correct content.
+Like the init container exercise, we can check that the `nginx` container serves the correct content.
 
 Run the port-forward command
 ```

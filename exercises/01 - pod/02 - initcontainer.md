@@ -2,12 +2,12 @@
 
 When running a pod, we might want to do some inital work before starting the main container in a pod. 
 
-It would be to fetch some data, manipulate configuration files, register the app or alike.
+It could be to fetch some data, manipulate configuration files, register the app or alike.
 
 In this exercise we will create a simple init container in a pod, that writes a simple html file to a volume. This volume is shared with the main container that will then serve the content through nginx.
 
 ## The pod manifest
-First we create a file with the manifest defining out pod
+First we create a file with the manifest defining our pod
 ```
 apiVersion: v1
 kind: Pod
