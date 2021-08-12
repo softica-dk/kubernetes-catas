@@ -1,12 +1,13 @@
 # Deployment
 
-In this exercise we will have a look at `replicaset` objects and how they differ from `pods`.
+In this exercise we will have a look at `deployment` objects and how they differ from `pods` and `replicaset`.
 
 ## What are we solving?
 
-The object we need, is a replicaset.
+The object we need, is a deployment.
 
-> In the old days, before replicasets, it was called a replication controller.
+> In the old days, before replicasets, rolling updates was done client side. The working group is now archived:
+> https://github.com/kubernetes/community/tree/master/archive/wg-apply
 
 ## Lets create a deployment
 Create a file called `my-deployment.yaml` with the following content
@@ -33,7 +34,7 @@ spec:
         ports:
         - containerPort: 80
 ```
-> Notice the labels. These are used to pair the replicaset created by the deployment, and managed pods
+> Notice the labels. These are used to pair the replicaset created by the deployment, and managed pods.
 
 Lets deploy it, and see what happens
 ```
@@ -110,7 +111,7 @@ kubectl rollout undo deployment dp-nginx --to-revision=1
 deployment.apps/dp-nginx rolled back
 ```
 
-> The `--to-revision` flag is optional. If now supplied, it will rollback on step.
+> The `--to-revision` flag is optional. If not supplied, it will rollback on step.
 
 We can now see that we are back using the first replicaset, and the new one is still kept
 ```
@@ -136,7 +137,7 @@ The field `.spec.strategy.type` can be either `Recreate` or `RollingUpdate`. Rec
 
 You can specify `.spec.strategy.rollingUpdate.maxUnavailable` and `.spec.strategy.rollingUpdate.maxSurge`. maxUnavailable indicates the number of Pods that can be unavailable during the update process either in number or percentage. 
 
-maxSurge defines how many Pods can be created above the desired stated value. This can also be given in a number or percentage.
+`maxSurge` defines how many Pods can be created above the desired stated value. This can also be given in a number or percentage.
 
 ## Clean up
 Since we can't delete the pods, as the replicasets keeps recreating them, we now need to delete the deployment object instead. When done, the deployment, replicaset and pods managed by the replicasets will be deleted.
