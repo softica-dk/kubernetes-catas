@@ -113,7 +113,9 @@ Session Affinity:  None
 Events:            <none>
 ```
 
-The important information here is the `Endpoints` field showing us the three pods ip's. Just as expected.
+> Note the Type is set to `ClusterIP`. We will cover other types later on.
+
+The important information here is the `Endpoints` field showing us the three pods IP's. Just as expected.
 
 ## Testing the service
 We can use our multitool pods to test the service.
@@ -227,7 +229,7 @@ Events:  <none>
 ```
 
 ## Cleanup
-Lets delete out service and deployment.
+Lets delete our service and deployment.
 
 ```
 kubectl delete deployment multitool
@@ -236,3 +238,5 @@ deployment.apps "multitool" deleted
 kubectl delete service multitool
 service "multitool" deleted
 ```
+
+> Note: When you delete a service, it will delete its endpoint object as well
