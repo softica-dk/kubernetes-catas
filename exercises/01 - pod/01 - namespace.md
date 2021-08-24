@@ -48,7 +48,10 @@ kubectl create -f pod.yaml
 Wait for the pod to be ready, as it needs to download the docker image and start it up
 ```
 kubectl get pods -A
+or 
+kubectl wait --for=condition=ready --timeout=600s pod/nginx -n test2
 ```
+
 > Question: What namespace did the pod get deployed to?
 
 Lets test that the pod is working
@@ -59,7 +62,7 @@ Open a webbrowser and go to localhost:8080
 
 You should see the nginx default page being displayed.
 
-
+> Type Ctrl + c to break the port-forward
 ## cleanup
 Lets cleanup, and remove the namespace and pod we created.
 ```

@@ -35,6 +35,11 @@ spec:
     emptyDir: {}
 ```
 
+Deploy the pod
+```
+kubectl create -f icpod.yaml
+```
+
 Check that the pod is initialized
 ```
 kubectl get pods

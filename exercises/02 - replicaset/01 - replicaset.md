@@ -36,7 +36,7 @@ spec:
 
 Lets deploy it, and see what happens
 ```
-kubectl create -f my-replicaset.yaml
+kubectl apply -f my-replicaset.yaml
 ```
 Lets use labels to wait for the pod to be ready. This way we don't get other pods in the output
 ```
@@ -110,3 +110,5 @@ kubectl delete replicaset rs-nginx
 ```
 
 Check the replicaset and number of running pods.
+
+> Note: You can't use apply on objects that hasn't been started by either `kubectl create --save-config` or `kubectl apply`

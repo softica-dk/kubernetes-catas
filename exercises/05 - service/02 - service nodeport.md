@@ -74,7 +74,12 @@ NAME              STATUS   ROLES                      AGE   VERSION
 google-chrome 192.168.122.111:31821
 ```
 
-
+## Clean up
+Lets delete the deployment and service
+```
+kubectl delete deployment multitool
+kubectl delete service multitool
+```
 
 
 

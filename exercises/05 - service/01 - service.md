@@ -212,7 +212,7 @@ multitool    10.42.0.17:80,10.42.0.18:80,10.42.1.13:80 + 2 more...            16
 
 We can see that the endpoint object is called multitool. Lets describe it.
 ```
-kubectl describe endpoints multitool                                                                                                                                               1   main 
+kubectl describe endpoints multitool
 Name:         multitool
 Namespace:    default
 Labels:       <none>
