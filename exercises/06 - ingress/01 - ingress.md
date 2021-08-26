@@ -40,6 +40,7 @@ spec:
   - http:
       paths:
         - path: /
+          pathType: ImplementationSpecific
           backend:
             service:
               name: multitool
