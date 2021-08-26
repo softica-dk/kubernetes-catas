@@ -35,6 +35,7 @@ metadata:
   name: multitool
   annotations:
     ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
   - http:
@@ -56,6 +57,7 @@ metadata:
   name: multitool
   annotations:
     ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
   - http:
