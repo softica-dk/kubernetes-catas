@@ -113,6 +113,7 @@ spec:
     http:
       paths:
         - path: /
+          pathType: ImplementationSpecific
           backend:
             serviceName: multitool
             servicePort: 80
