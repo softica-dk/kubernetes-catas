@@ -28,6 +28,8 @@ spec:
       labels:
         app: nginx # has to match .spec.selector.matchLabels
     spec:
+      imagePullSecrets:
+      - name: regcred
       terminationGracePeriodSeconds: 10
       containers:
       - name: nginx

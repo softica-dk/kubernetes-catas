@@ -11,6 +11,8 @@ kind: Pod
 metadata:
   name: willidie
 spec:
+  imagePullSecrets:
+  - name: regcred
   containers:
   - name: nginx
     image: nginx:latest

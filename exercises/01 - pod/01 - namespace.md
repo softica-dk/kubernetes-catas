@@ -26,8 +26,10 @@ Lets remove the first namespace
 ```
 kubectl delete namespace test 
 ```
+
 ## Deploy a simple pod in namespace
 Lets define a simple pod running nginx:
+
 ```
 apiVersion: v1
 kind: Pod
@@ -35,6 +37,8 @@ metadata:
   name: nginx
   namespace: test2
 spec:
+  imagePullSecrets:
+  - name: regcred
   containers:
   - name: nginx
     image: nginx:latest

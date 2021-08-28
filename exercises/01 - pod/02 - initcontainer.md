@@ -14,6 +14,8 @@ kind: Pod
 metadata:
   name: icpod
 spec:
+  imagePullSecrets:
+  - name: regcred
   containers:
   - name: nginx
     image: nginx:latest

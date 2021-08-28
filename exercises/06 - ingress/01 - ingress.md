@@ -16,7 +16,8 @@ We now need to expose our service and tie it to a dns name. This is what we will
 We create a deployment of multitool and expose it with a service. We do it with commands to make it easier.
 
 ```
-kubectl create deployment multitool --image=praqma/network-multitool
+kubectl create deployment multitool --image=praqma/network-multitool --overrides='{"apiVersion": "apps/v1", 
+"spec": {"template":{"spec":{"imagePullSecrets": [{"name": "regcred"}]}}}}'
 kubectl expose deployment multitool --type=ClusterIP --name=multitool --port=80 --target-port=80
 kubectl wait --for=condition=available --timeout=600s deployment/multitool
 ```

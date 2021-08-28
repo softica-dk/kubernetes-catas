@@ -10,7 +10,8 @@ Sometimes we dont have an `Ingress controller` and need to expose a service to t
 ## Create a Deployment
 Lets create a Multitool deployment to expose 
 ```
-kubectl create deployment multitool --image=praqma/network-multitool --replicas=3
+kubectl create deployment multitool --image=praqma/network-multitool --replicas=3 --overrides='{"apiVersion": "apps/v1", 
+"spec": {"template":{"spec":{"imagePullSecrets": [{"name": "regcred"}]}}}}'
 ```
 
 Wait for all pods to be ready 
@@ -36,6 +37,7 @@ spec:
       port: 80
       targetPort: 80
 ```
+
 Apply the service definition
 ```
 kubectl apply -f multitool-nodeport-service.yaml

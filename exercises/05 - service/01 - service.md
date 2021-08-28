@@ -10,7 +10,8 @@ We create a deployment that creates 3 replicas of network-multitool. This will h
 
 Since we are not going to use the deployment object, we will do it by command, and not via yaml:
 ```
-kubectl create deployment multitool --image=praqma/network-multitool --replicas=3
+kubectl create deployment multitool --image=praqma/network-multitool --replicas=3 --overrides='{"apiVersion": "apps/v1", 
+"spec": {"template":{"spec":{"imagePullSecrets": [{"name": "regcred"}]}}}}'
 ```
 
 Now wait for the deployment to be ready

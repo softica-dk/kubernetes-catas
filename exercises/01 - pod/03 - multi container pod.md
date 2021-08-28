@@ -16,6 +16,8 @@ kind: Pod
 metadata:
   name: two-containers
 spec:
+  imagePullSecrets:
+  - name: regcred
   restartPolicy: Never
   volumes:
   - name: shared-data

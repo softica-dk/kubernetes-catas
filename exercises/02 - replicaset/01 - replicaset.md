@@ -28,6 +28,8 @@ spec:
       labels:
         app: my-nginx
     spec:
+      imagePullSecrets:
+      - name: regcred
       containers:
       - name: my-web
         image: nginx
