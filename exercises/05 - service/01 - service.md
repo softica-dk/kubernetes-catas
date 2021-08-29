@@ -8,10 +8,12 @@ When deploying pods they get a new `ip` everytime they are created. This makes i
 ## Lets create a deployment
 We create a deployment that creates 3 replicas of network-multitool. This will help us see the traffic being spread out as it displays its name in the html output.
 
-Since we are not going to use the deployment object, we will do it by command, and not via yaml:
+Since we are not going to use the deployment object, we will do it by command, and not via yaml. 
+
+First we create a deployment called multitool, and then we patch it to insert the imagePullSecret.
 ```
-kubectl create deployment multitool --image=praqma/network-multitool --replicas=3 --overrides='{"apiVersion": "apps/v1", 
-"spec": {"template":{"spec":{"imagePullSecrets": [{"name": "regcred"}]}}}}'
+kubectl create deployment multitool --replicas=3 --image=praqma/network-multitool
+kubectl patch deployment multitool --patch '{"spec": {"template":{"spec":{"imagePullSecrets": [{"name": "regcred"}]}}}}'
 ```
 
 Now wait for the deployment to be ready

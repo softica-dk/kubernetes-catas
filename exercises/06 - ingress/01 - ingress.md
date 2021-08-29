@@ -15,9 +15,12 @@ We now need to expose our service and tie it to a dns name. This is what we will
 ## Lets prepare some pods and service to expose
 We create a deployment of multitool and expose it with a service. We do it with commands to make it easier.
 
+Since we are not going to use the deployment object, we will do it by command, and not via yaml. 
+
 ```
-kubectl create deployment multitool --image=praqma/network-multitool --overrides='{"apiVersion": "apps/v1", 
-"spec": {"template":{"spec":{"imagePullSecrets": [{"name": "regcred"}]}}}}'
+kubectl create deployment multitool --replicas=3 --image=praqma/network-multitool
+kubectl patch deployment multitool --patch '{"spec": {"template":{"spec":{"imagePullSecrets": [{"name": "regcred"}]}}}}'
+
 kubectl expose deployment multitool --type=ClusterIP --name=multitool --port=80 --target-port=80
 kubectl wait --for=condition=available --timeout=600s deployment/multitool
 ```
@@ -95,7 +98,15 @@ NAME              STATUS   ROLES                      AGE   VERSION
 192.168.122.113   Ready    controlplane,etcd,worker   13d   v1.17.4
 ```
 
-Open a browser and go to one of the ip's. It should give you a warning about self signed certificates `Your connection is not private`. In chrome, click `Advanced`and then `"Proceed to [IP]`. You should see the multitool output.
+In my case i have three nodes, and their names are given their ip's. If you need to find the ip, simply do a describe on a node
+
+```
+kubectl describe node <node-name>
+```
+
+> If you are running on `Docker for Windows or Mac` you dont need the ip of a node, but simply use `127.0.0.1`. 
+
+Open a browser and go to one of the ip's (or 127.0.0.1 if on Windows or Mac). It should give you a warning about self signed certificates `Your connection is not private`. In chrome, click `Advanced`and then `"Proceed to [IP]`. You should see the multitool output.
 
 ## Adding host names
 Right now all traffic is routed to our service from the ingress. Lets changed it to only route `www.multitool.com` by editing the ingress manifest file so that it looks like this
@@ -138,9 +149,14 @@ Edit your /etc/hosts file (`c:\windows\system32\drivers\etc\hosts` on Windows)
 
 > A guide : https://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/
 
-Add the following to the bottom of the file and then save it.
+Add the following to the bottom of the file if you are on a flat network and then save it.
 ```
 192.168.122.111 multitool.com
+```
+
+If you are running Kubernetes on Docker for Windows or Mac, you should instead add
+```
+127.0.0.1 multitool.com
 ```
 
 Open `multitool.com` in a browser, and you should see the multitool output. In a production environment we would not edit hosts file but use a proper DNS server to link `multitool.com` to the ip of the `ingress controller`. 

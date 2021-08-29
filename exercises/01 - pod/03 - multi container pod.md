@@ -39,7 +39,7 @@ spec:
     args: ["-c", "curl https://gist.githubusercontent.com/calebgrove/7260396/raw/81cb4d57caa09dd5c605987c770c814a2070853c/helloworld.html -o /pod-data/index.html"]
 ```
 
-The second container `curl` will die when done, and the other will keep on living, and serve the html `curl` downloaded from the gist.
+> The second container `curl` will die when done, and the other will keep on living, and serve the html `curl` downloaded from the gist.
 
 They both mount the volume `shared-data` where `curl` puts an `index.html` that the container `nginx` then serves. 
 

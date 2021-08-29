@@ -27,6 +27,12 @@ Lets remove the first namespace
 kubectl delete namespace test 
 ```
 
+## Secrets are namespaced
+So we need to add our docker hub secret to the new namespace as well
+```
+kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=<your-user-name> --docker-password=<your-pword> --docker-email=<your-email> --namespace=test2
+```
+
 ## Deploy a simple pod in namespace
 Lets define a simple pod running nginx:
 
