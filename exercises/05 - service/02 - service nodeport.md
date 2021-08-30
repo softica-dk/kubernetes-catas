@@ -82,6 +82,8 @@ NAME              STATUS   ROLES                      AGE   VERSION
 google-chrome 192.168.122.111:31821
 ```
 
+> If you are running kubernetes using Docker Desktop use `localhost` as the node ip
+
 ## Clean up
 Lets delete the deployment and service
 ```
