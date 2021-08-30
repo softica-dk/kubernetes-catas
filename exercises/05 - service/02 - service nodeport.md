@@ -18,6 +18,8 @@ kubectl create deployment multitool --replicas=3 --image=praqma/network-multitoo
 kubectl patch deployment multitool --patch '{"spec": {"template":{"spec":{"imagePullSecrets": [{"name": "regcred"}]}}}}'
 ```
 
+> On windows use: `kubectl patch deployment multitool --patch '{\"spec\": {\"template\":{\"spec\":{\"imagePullSecrets\": [{\"name\": \"regcred\"}]}}}}'`
+
 Wait for all pods to be ready 
 ```
 kubectl wait --for=condition=available --timeout=600s deployment/multitool
