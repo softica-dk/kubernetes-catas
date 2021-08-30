@@ -56,7 +56,7 @@ IP:           10.42.2.15
 ...
 ```
 
-It shows to labes, one `app=multitool` and another with `pod-template-hash=7885b5f94f`. We can use the first to link our service to the pods, as all pods in the deployment has this label.
+It shows two labes, one `app=multitool` and another with `pod-template-hash=7885b5f94f`. We can use the first to link our service to the pods, as all pods in the deployment has this label.
 
 > If you create a real deployment yaml file, you can specify the label key/values yourself
 
