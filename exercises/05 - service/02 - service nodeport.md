@@ -18,6 +18,8 @@ kubectl create deployment multitool --replicas=3 --image=praqma/network-multitoo
 kubectl patch deployment multitool --patch '{"spec": {"template":{"spec":{"imagePullSecrets": [{"name": "regcred"}]}}}}'
 ```
 
+> On windows use: `kubectl patch deployment multitool --patch '{\"spec\": {\"template\":{\"spec\":{\"imagePullSecrets\": [{\"name\": \"regcred\"}]}}}}'`
+
 Wait for all pods to be ready 
 ```
 kubectl wait --for=condition=available --timeout=600s deployment/multitool
@@ -79,6 +81,8 @@ NAME              STATUS   ROLES                      AGE   VERSION
 
 google-chrome 192.168.122.111:31821
 ```
+
+> If you are running kubernetes using Docker Desktop use `localhost` as the node ip
 
 ## Clean up
 Lets delete the deployment and service

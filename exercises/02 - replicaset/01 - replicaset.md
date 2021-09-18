@@ -102,7 +102,7 @@ kubectl apply -f my-replicaset.yaml
 
 Check the replicaset and number of running pods.
 
-The great this about this approach is that we can keep track of all changes with `git`. By running commands, that's not possible.
+The great thing about this approach is that we can keep track of all changes with `git`. By running commands, that's not possible.
 
 ## Clean up
 Since we can't delete the pods, as the replicaset keeps recreating them, we now need to delete the replicaset object instead. When done, the replicaset and pods managed by the replicaset will be deleted.
